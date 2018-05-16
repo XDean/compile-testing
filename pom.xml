@@ -14,6 +14,21 @@
 	<description>Framework to quick build compile testing.</description>
 	<url>${repository.url}</url>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.google.testing.compile</groupId>
+			<artifactId>compile-testing</artifactId>
+			<version>0.13</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+			<version>1.0-rc3</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
 	<scm>
 		<connection>scm:${scm.url}</connection>
 		<developerConnection>scm:${scm.url}</developerConnection>
