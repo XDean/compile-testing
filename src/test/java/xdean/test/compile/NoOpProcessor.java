@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package xdean.annotation.processor.toolkit;
+package xdean.test.compile;
 
 import com.google.common.collect.ImmutableSet;
 import java.util.Map;
@@ -26,7 +26,10 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 
 public class NoOpProcessor extends AbstractProcessor {
-  static class PackageProcessor extends NoOpProcessor{}
+  static class PrivateProcessor extends NoOpProcessor{
+    private PrivateProcessor() {
+    }
+  }
   boolean invoked = false;
   Map<String, String> options;
 

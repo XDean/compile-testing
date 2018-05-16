@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package xdean.annotation.processor.toolkit;
+package xdean.test.compile;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -27,11 +27,7 @@ import org.junit.runner.RunWith;
 
 import com.google.testing.compile.Compilation;
 
-import xdean.annotation.processor.toolkit.NoOpProcessor.PackageProcessor;
-import xdean.annotation.processor.toolkit.test.Compile;
-import xdean.annotation.processor.toolkit.test.CompileTestCase;
-import xdean.annotation.processor.toolkit.test.CompileTestRunner;
-import xdean.annotation.processor.toolkit.test.Compiled;
+import xdean.test.compile.NoOpProcessor.PrivateProcessor;
 
 public class JunitCompileTest {
 
@@ -160,7 +156,7 @@ public class JunitCompileTest {
 
   public static class ProcessorConstructError extends CompileTestCase {
     @Test
-    @Compiled(sources = "/HelloWorld.java", processors = PackageProcessor.class)
+    @Compiled(sources = "/HelloWorld.java", processors = PrivateProcessor.class)
     public void test(Compilation c) throws Exception {
     }
   }
