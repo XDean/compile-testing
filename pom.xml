@@ -8,7 +8,7 @@
 		<version>1.1</version>
 	</parent>
 	<artifactId>compile-testing</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 	<name>Compile Testing</name>
 	<description>Framework to quick build compile testing.</description>
@@ -28,8 +28,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.github.XDean</groupId>
+			<groupId>com.google.testing.compile</groupId>
 			<artifactId>compile-testing</artifactId>
+			<version>0.13</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.auto.service</groupId>
