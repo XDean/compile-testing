@@ -5,25 +5,35 @@
 	<parent>
 		<groupId>com.github.XDean</groupId>
 		<artifactId>oss-parent</artifactId>
-		<version>1.0</version>
+		<version>1.1</version>
 	</parent>
 	<artifactId>compile-testing</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<packaging>jar</packaging>
 	<name>Compile Testing</name>
 	<description>Framework to quick build compile testing.</description>
 	<url>${repository.url}</url>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.github.XDean</groupId>
+				<artifactId>dependency-parent</artifactId>
+				<version>1.1</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
-			<groupId>com.google.testing.compile</groupId>
+			<groupId>com.github.XDean</groupId>
 			<artifactId>compile-testing</artifactId>
-			<version>0.13</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.auto.service</groupId>
 			<artifactId>auto-service</artifactId>
-			<version>1.0-rc3</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
