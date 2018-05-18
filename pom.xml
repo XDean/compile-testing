@@ -11,20 +11,8 @@
 	<version>1.0.4</version>
 	<packaging>jar</packaging>
 	<name>Compile Testing</name>
-	<description>Framework to quick build compile testing.</description>
-	<url>${repository.url}</url>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.github.XDean</groupId>
-				<artifactId>dependency-parent</artifactId>
-				<version>1.1</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+	<description>Framework to quick build compile testing</description>
+	<url>https://github.com/XDean/compile-testing</url>
 
 	<dependencies>
 		<dependency>
@@ -35,6 +23,7 @@
 		<dependency>
 			<groupId>com.google.auto.service</groupId>
 			<artifactId>auto-service</artifactId>
+			<version>1.0-rc3</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
