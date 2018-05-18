@@ -28,8 +28,8 @@ import javax.lang.model.SourceVersion;
 
 /**
  * Indicate the test method is a compile period test.
- * 
- * The test class must extends {@link CompileTestCase}. The method also need annotated {@code @Test}
+ *
+ * The test class must extends {@link CompileTestCase}. The method don't need annotated {@code @Test}
  * and it must be public void and have one argument with type {@link RoundEnvironment}.
  *
  * @author Dean Xu (XDean@github.com)

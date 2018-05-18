@@ -1,23 +1,25 @@
 /*
  * Copyright (C) 2018 XDean.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package xdean.test.compile;
 
-import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
@@ -34,9 +36,9 @@ import com.google.testing.compile.Compiler;
 import com.google.testing.compile.JavaFileObjects;
 
 /**
- * Runner for compilation test. It can process {@code @Compile}, {@code @Compiled} and normal junit
- * test method.
- * 
+ * Runner for compilation test. It can process {@code @Compile},
+ * {@code @Compiled} and normal junit test method.
+ *
  * @see Compile
  * @see Compiled
  * @author Dean Xu (XDean@github.com)
@@ -57,6 +59,7 @@ public class CompileTestRunner extends BlockJUnit4ClassRunner {
   @Override
   protected void validateTestMethods(List<Throwable> errors) {
     validatePublicVoidNoArgMethods(Test.class, false, errors);
+    validateCompileTestMethods(errors);
   }
 
   @Override
@@ -67,7 +70,8 @@ public class CompileTestRunner extends BlockJUnit4ClassRunner {
       return new Statement() {
         @Override
         public void evaluate() throws Throwable {
-          // Compile compile = AnnotationUtils.getAnnotation(method.getMethod(), Compile.class);
+          // Compile compile = AnnotationUtils.getAnnotation(method.getMethod(),
+          // Compile.class);
           Compile compile = method.getMethod().getAnnotation(Compile.class);
           Class<?> clz = getTestClass().getJavaClass();
           Compiler.javac()
@@ -85,7 +89,8 @@ public class CompileTestRunner extends BlockJUnit4ClassRunner {
       return new Statement() {
         @Override
         public void evaluate() throws Throwable {
-          // Compiled compiled = AnnotationUtils.getAnnotation(method.getMethod(), Compiled.class);
+          // Compiled compiled =
+          // AnnotationUtils.getAnnotation(method.getMethod(), Compiled.class);
           Compiled compiled = method.getMethod().getAnnotation(Compiled.class);
           Class<?> clz = getTestClass().getJavaClass();
           Compilation compilation = Compiler.javac()
@@ -112,11 +117,20 @@ public class CompileTestRunner extends BlockJUnit4ClassRunner {
   }
 
   @Override
-  protected void validatePublicVoidNoArgMethods(Class<? extends Annotation> annotation, boolean isStatic,
-      List<Throwable> errors) {
-    List<FrameworkMethod> methods = getTestClass().getAnnotatedMethods(annotation);
+  protected List<FrameworkMethod> computeTestMethods() {
+    List<FrameworkMethod> list = new ArrayList<>();
+    list.addAll(getTestClass().getAnnotatedMethods(Test.class));
+    list.addAll(getTestClass().getAnnotatedMethods(Compile.class));
+    list.addAll(getTestClass().getAnnotatedMethods(Compiled.class));
+    return list;
+  }
+
+  protected void validateCompileTestMethods(List<Throwable> errors) {
+    Set<FrameworkMethod> methods = new HashSet<>();
+    methods.addAll(getTestClass().getAnnotatedMethods(Compile.class));
+    methods.addAll(getTestClass().getAnnotatedMethods(Compiled.class));
     for (FrameworkMethod method : methods) {
-      method.validatePublicVoid(isStatic, errors);
+      method.validatePublicVoid(false, errors);
       boolean compile = method.getMethod().isAnnotationPresent(Compile.class);
       boolean compiled = method.getMethod().isAnnotationPresent(Compiled.class);
       if (compile && compiled) {
@@ -133,8 +147,6 @@ public class CompileTestRunner extends BlockJUnit4ClassRunner {
           errors.add(new Exception(
               "Method " + method.getName() + " must have only one param with type Compilation"));
         }
-      } else {
-        method.validatePublicVoidNoArg(isStatic, errors);
       }
     }
   }

@@ -28,8 +28,8 @@ import com.google.testing.compile.Compilation;
 
 /**
  * Indicate the test method is a compiled test.
- * 
- * The test class must extends {@link CompileTestCase}. The method also need annotated {@code @Test}
+ *
+ * The test class must extends {@link CompileTestCase}. The method also don't annotated {@code @Test}
  * and it must be public void and have only one argument with type {@link Compilation}.
  *
  * @author Dean Xu (XDean@github.com)

@@ -1,14 +1,16 @@
 /*
  * Copyright (C) 2018 XDean.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
  * the License.
  */
 package xdean.test.compile;
@@ -32,12 +34,10 @@ import xdean.test.compile.NoOpProcessor.PrivateProcessor;
 public class JunitCompileTest {
 
   public static class CompileGolden extends CompileTestCase {
-    @Test
     @Compile(sources = "/HelloWorld.java")
     public void test(RoundEnvironment env) throws Exception {
     }
 
-    @Test
     @Compile(sources = "/HelloWorld.java", annotations = Compile.class)
     public void test2(RoundEnvironment env) throws Exception {
     }
@@ -53,7 +53,6 @@ public class JunitCompileTest {
   }
 
   public static class CompiledGolden extends CompileTestCase {
-    @Test
     @Compiled(sources = "/HelloWorld.java", processors = NoOpProcessor.class, options = "-Atest=true")
     public void test(Compilation c) throws Exception {
       NoOpProcessor noOpProcessor = (NoOpProcessor) c.compiler().processors().get(0);
@@ -68,7 +67,6 @@ public class JunitCompileTest {
   }
 
   public static class CompileNoArg extends CompileTestCase {
-    @Test
     @Compile(sources = "/HelloWorld.java")
     public void test() throws Exception {
     }
@@ -80,7 +78,6 @@ public class JunitCompileTest {
   }
 
   public static class CompiledNoArg extends CompileTestCase {
-    @Test
     @Compiled(sources = "/HelloWorld.java")
     public void test() throws Exception {
     }
@@ -92,7 +89,6 @@ public class JunitCompileTest {
   }
 
   public static class CompileWrongArg extends CompileTestCase {
-    @Test
     @Compile(sources = "/HelloWorld.java")
     public void test(Compilation c) throws Exception {
     }
@@ -104,7 +100,6 @@ public class JunitCompileTest {
   }
 
   public static class CompiledWrongArg extends CompileTestCase {
-    @Test
     @Compiled(sources = "/HelloWorld.java")
     public void test(RoundEnvironment env) throws Exception {
     }
@@ -116,7 +111,6 @@ public class JunitCompileTest {
   }
 
   public static class Both extends CompileTestCase {
-    @Test
     @Compiled(sources = "/HelloWorld.java")
     @Compile(sources = "/HelloWorld.java")
     public void test(RoundEnvironment env) throws Exception {
@@ -130,7 +124,6 @@ public class JunitCompileTest {
 
   @RunWith(CompileTestRunner.class)
   public static class NotCompileTestCase {
-    @Test
     @Compile(sources = "/HelloWorld.java")
     public void test(RoundEnvironment env) throws Exception {
     }
@@ -142,7 +135,6 @@ public class JunitCompileTest {
   }
 
   public static class CompileError extends CompileTestCase {
-    @Test
     @Compile(sources = "/HelloWorld.java")
     public void test(RoundEnvironment env) throws Exception {
       throw new Exception("CompileError");
@@ -155,7 +147,6 @@ public class JunitCompileTest {
   }
 
   public static class ProcessorConstructError extends CompileTestCase {
-    @Test
     @Compiled(sources = "/HelloWorld.java", processors = PrivateProcessor.class)
     public void test(Compilation c) throws Exception {
     }
